@@ -1,0 +1,85 @@
+@use '../../variables' as *;
+
+.currencyInput {
+  .title {
+    margin-bottom: 14px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: $gray;
+  }
+
+  .currencyContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (min-width: 576px) {
+      flex-direction: column;
+      align-items: start;
+
+      &[data-last='last'] {
+        align-items: end;
+
+        .currencySelection {
+          flex-direction: row-reverse;
+        }
+      }
+    }
+
+    .currencySelection {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      .flag {
+        display: none;
+        width: min(calc(45px + 1.5625vw), 60px);
+        height: min(calc(45px + 1.5625vw), 60px);
+
+        @media (min-width: 325px) {
+          display: block;
+        }
+      }
+
+      .changeCurrency {
+        margin: 0;
+        border: none;
+        background: transparent;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 23px;
+        color: $second-blue;
+        cursor: pointer;
+
+        @media (min-width: 325px) {
+          margin: 0 17px;
+        }
+
+        .expandIcon {
+          position: relative;
+          top: 4px;
+        }
+      }
+    }
+
+    .input {
+      width: 100%;
+      max-width: 300px;
+      border: none;
+      padding: 11px 14px;
+      background: #efefef;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 23px;
+      text-align: right;
+      color: $dark-gray;
+
+      @media (min-width: 576px) {
+        margin-top: 40px;
+        text-align: left;
+      }
+    }
+  }
+}

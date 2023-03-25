@@ -1,0 +1,6 @@
+.appContainer {
+  width: calc(100vw - 40px);
+  margin: min(calc(20px + 2.5625vw), 45px) auto;
+  border-radius: 10px;
+  max-width: 768px;
+}

@@ -1,0 +1,53 @@
+@use '../../variables' as *;
+
+.dropdown {
+  position: absolute;
+  z-index: 3;
+  top: 55%;
+  left: 50%;
+  margin-top: 15px;
+  background: #ffffff;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.22);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px 0;
+  width: 130px;
+
+  &[data-last='last'] {
+    left: auto;
+    right: 50%;
+  }
+
+  .dropdownList {
+    overflow: hidden;
+
+    .item {
+      padding: 12px 20px;
+      cursor: pointer;
+
+      .itemBtn {
+        display: flex;
+        align-items: center;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+
+        .itemIcon {
+          width: 20px;
+          height: 20px;
+          margin-right: 7px;
+        }
+      }
+
+      &.active,
+      &:hover {
+        background: rgba(118, 118, 198, 0.13);
+      }
+
+      &.active {
+        font-weight: bold;
+        color: #7676c6;
+      }
+    }
+  }
+}

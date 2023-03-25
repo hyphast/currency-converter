@@ -1,0 +1,79 @@
+@use '../../variables' as *;
+
+.layout {
+  .logoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .logo {
+      display: none;
+      margin-right: 7px;
+      width: max(10%, 45px);
+      height: max(10%, 45px);
+
+      @media (min-width: 325px) {
+        display: block;
+      }
+    }
+  }
+
+  .appName {
+    font-weight: 700;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    line-height: 29px;
+    text-align: center;
+    color: $blue;
+  }
+
+  .navBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+    @media (min-width: 325px) {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin-top: 45px;
+    }
+
+    li {
+      & > button {
+        background: $second-blue;
+        color: #ffffff;
+        border: none;
+        border-radius: 20px;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        padding: 10px;
+        width: 150px;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.02);
+        }
+      }
+
+      & + li {
+        margin-top: 10px;
+
+        @media (min-width: 325px) {
+          margin-left: 7%;
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  .main {
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    margin-top: 45px;
+    padding: min(calc(12px + 1.5625vw), 30px);
+  }
+}

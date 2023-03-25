@@ -1,0 +1,49 @@
+@use '../../variables' as *;
+
+.currencyConverter {
+  @media (min-width: 576px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .exchange {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+
+    .delimiter {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      border-top: 1px solid #e7e7ee;
+
+      @media (min-width: 576px) {
+        display: none;
+      }
+    }
+
+    .exchangeBtn {
+      position: relative;
+      z-index: 2;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: all $duration ease-in-out;
+
+      &:hover {
+        transform: rotate(90deg) scale(1.09);
+      }
+
+      .exchangeIcon {
+        width: min(calc(40px + 1.5625vw), 60px);
+        height: min(calc(40px + 1.5625vw), 60px);
+      }
+
+      @media (min-width: 576px) {
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
