@@ -2,4 +2,93 @@
 
 .exchangeRates {
   position: relative;
+
+  .dropdownContainer {
+    position: relative;
+    width: fit-content;
+
+    .changeCurrency {
+      background: transparent;
+      border: none;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 23px;
+      color: $second-blue;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      .chosenCurrency {
+        margin-left: 10px;
+        display: none;
+
+        @media (min-width: 250px) {
+          display: flex;
+          align-items: center;
+        }
+
+        .flag {
+          margin-right: 5px;
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+
+    .dropdown {
+      left: auto;
+      width: min(calc(100px + 6.5625vw), 190px);
+    }
+  }
+
+  .rates {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 35px;
+
+    .rate {
+      font-weight: 700;
+      font-size: clamp(18px, 5vw, 25px);
+      line-height: 29px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @media (min-width: 250px) {
+        display: block;
+      }
+
+      & + .rate {
+        margin-top: 15px;
+      }
+
+      .currency {
+        color: $second-blue;
+      }
+
+      .flag {
+        width: 35px;
+        height: 35px;
+        position: relative;
+        top: 10px;
+        left: 5px;
+      }
+
+      .equal {
+        margin: 0 min(calc(4px + 1.5625vw), 20px);
+        color: $gray;
+      }
+
+      .value {
+        color: $dark-gray;
+      }
+
+      .loader {
+        position: relative;
+        top: 8px;
+      }
+    }
+  }
 }

@@ -1,58 +1,45 @@
-import React, { useRef, useState } from 'react'
 import cn from 'classnames'
-import { useClickOutside } from '../../hooks/useClickOutside'
-import RUB from '../../assets/rub.png'
-import USD from '../../assets/usd.png'
-import EUR from '../../assets/eur.png'
+import { Currency } from '../../store/types'
 
 import styles from './Dropdown.module.scss'
 
-type Currency = 'USD' | 'EUR' | 'RUB'
-type CurrencyListItem = {
-  name: Currency
-  icon: string
-}
-const currencyList: CurrencyListItem[] = [
-  { name: 'RUB', icon: RUB },
-  { name: 'USD', icon: USD },
-  { name: 'EUR', icon: EUR },
-]
-
-type DropdownProps = {
-  setIsDropdownVisible: React.Dispatch<React.SetStateAction<boolean>>
-  last?: boolean
+type DropdownProps<T> = {
+  list: Array<{
+    name: T
+    icon: string
+  }>
+  cb: (arg: T) => void
+  selected: T
+  className?: string
 }
 
-export function Dropdown({ last, setIsDropdownVisible }: DropdownProps) {
-  const [selectedCurrency, setSelectedCurrency] = useState<Currency>('RUB')
-  const dropdownRef = useRef<HTMLDivElement>(null)
-  useClickOutside(dropdownRef, () => setIsDropdownVisible(false))
-
-  const onCurrencyClick = (currency: Currency) => {
-    setSelectedCurrency(currency)
+export function Dropdown<T extends Currency = Currency>({
+  className,
+  selected,
+  list,
+  cb,
+}: DropdownProps<T>) {
+  const onItemClick = (value: T) => {
+    cb(value)
   }
 
   return (
-    <div
-      ref={dropdownRef}
-      className={styles.dropdown}
-      data-last={last ? 'last' : ''}
-    >
+    <div className={cn(className, styles.dropdown)}>
       <ul className={styles.dropdownList}>
-        {currencyList.map((cur) => (
+        {list.map((item) => (
           <li
-            key={cur.name}
+            key={item.name}
             className={cn(
-              { [styles.active]: cur.name === selectedCurrency },
+              { [styles.active]: item.name === selected },
               styles.item
             )}
-            onClick={() => onCurrencyClick(cur.name)}
-            onKeyDown={() => onCurrencyClick(cur.name)}
+            onClick={() => onItemClick(item.name)}
+            onKeyDown={() => onItemClick(item.name)}
           >
             <button className={styles.itemBtn}>
               <>
-                <img className={styles.itemIcon} src={cur.icon} />
-                {cur.name}
+                <img className={styles.itemIcon} src={item.icon} />
+                {item.name}
               </>
             </button>
           </li>
@@ -62,5 +49,5 @@ export function Dropdown({ last, setIsDropdownVisible }: DropdownProps) {
   )
 }
 Dropdown.defaultProps = {
-  last: false,
+  className: '',
 }

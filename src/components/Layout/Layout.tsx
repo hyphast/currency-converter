@@ -1,7 +1,6 @@
 import cn from 'classnames'
+import { Outlet, NavLink } from 'react-router-dom'
 import { ReactComponent as LogoIcon } from '../../assets/logo.svg'
-import { CurrencyConverter } from '../CurrencyConverter'
-import { ExchangeRates } from '../ExchangeRates'
 
 import styles from './Layout.module.scss'
 
@@ -16,17 +15,34 @@ export function Layout() {
         <nav>
           <ul className={styles.navBar}>
             <li>
-              <button>Converter</button>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? cn(styles.active, styles.menuItem)
+                    : styles.menuItem
+                }
+                to="/converter"
+              >
+                Converter
+              </NavLink>
             </li>
             <li>
-              <button>Exchange Rates</button>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? cn(styles.active, styles.menuItem)
+                    : styles.menuItem
+                }
+                to="/rate"
+              >
+                Exchange Rates
+              </NavLink>
             </li>
           </ul>
         </nav>
       </header>
       <main className={styles.main}>
-        <CurrencyConverter />
-        {/* <ExchangeRates /> */}
+        <Outlet />
       </main>
     </div>
   )

@@ -29,12 +29,7 @@
       z-index: 2;
       border: none;
       background: transparent;
-      cursor: pointer;
       transition: all $duration ease-in-out;
-
-      &:hover {
-        transform: rotate(90deg) scale(1.09);
-      }
 
       .exchangeIcon {
         width: min(calc(40px + 1.5625vw), 60px);
