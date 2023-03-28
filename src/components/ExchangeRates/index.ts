@@ -1,1 +1,1 @@
-export * from './ExchangeRates'
+export * from './ExchangeRatesContainer'

@@ -1,14 +1,17 @@
 import { NumberFormatValues } from 'react-number-format'
-import { useQuery } from 'react-query'
+import { useQuery, UseQueryResult } from 'react-query'
 import { fetchConvertedCurrency } from '../../API/API'
 import { debounce } from '../../utils'
-import { CurrencyInputProps } from './CurrencyInput'
+import { CurInputContainerProps } from './CurrencyInputContainer'
 
-type UseCurrencyInputReturn = {
+export type UseCurrencyInputReturn = {
   handleInput: (values: NumberFormatValues) => void
-  data: any
+  queryData: UseQueryResult<any, unknown>
 }
-type UseCurrencyInputArgs = Pick<CurrencyInputProps, 'APIParams' | 'moneyState'>
+type UseCurrencyInputArgs = Pick<
+  CurInputContainerProps,
+  'APIParams' | 'moneyState'
+>
 export const useCurrencyInput = ({
   APIParams,
   moneyState,
@@ -20,6 +23,9 @@ export const useCurrencyInput = ({
     refetchOnWindowFocus: false,
     enabled: !!APIParams.amount,
     initialData: { result: money.amount },
+    // staleTime: 60000,
+    cacheTime: 600000,
+    // initialDataUpdatedAt: Date.now() - 60000,
   })
 
   const debounceInput = debounce(
@@ -27,7 +33,7 @@ export const useCurrencyInput = ({
     250
   )
 
-  const onInputValueChange = (values: NumberFormatValues) => {
+  const handleInput = (values: NumberFormatValues) => {
     const { floatValue } = values
 
     if (!floatValue) return
@@ -35,5 +41,5 @@ export const useCurrencyInput = ({
     debounceInput(floatValue)
   }
 
-  return { data: queryData, handleInput: onInputValueChange }
+  return { queryData, handleInput }
 }

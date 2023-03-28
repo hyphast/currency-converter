@@ -18,7 +18,7 @@ export async function fetchConvertedCurrency(fetchParams: FetchParams) {
   const queryParams = new URLSearchParams(Object.entries(params))
 
   const url =
-    'https://api.apilayer.com/currency_data/convert?' + queryParams.toString()
+    import.meta.env.VITE_CURRENCY_API + '/convert?' + queryParams.toString()
   const config = {
     headers: {
       apikey: import.meta.env.VITE_API_KEY,

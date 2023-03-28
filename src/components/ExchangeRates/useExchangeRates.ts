@@ -1,10 +1,10 @@
-import { useQuery } from 'react-query'
+import { useQuery, UseQueryResult } from 'react-query'
 import { fetchConvertedCurrency } from '../../API/API'
 import { Currency, currencyList } from '../../store/types'
 
-type UseExchangeRatesReturn = Array<{
-  from: Currency
-  result: any
+export type UseExchangeRatesReturn = Array<{
+  fromCurrency: Currency
+  queryData: UseQueryResult<any, unknown>
 }>
 export const useExchangeRates = (
   currency: Currency
@@ -13,7 +13,7 @@ export const useExchangeRates = (
     .filter((item) => item.name !== currency)
     .map((cur) => cur.name)
 
-  const firstData = useQuery(
+  const firstQuery = useQuery(
     [otherSymbols[0], currency, 1],
     () =>
       fetchConvertedCurrency({
@@ -23,9 +23,11 @@ export const useExchangeRates = (
       }),
     {
       refetchOnWindowFocus: false,
+      cacheTime: 600000,
+      staleTime: 60000,
     }
   )
-  const secondData = useQuery(
+  const secondQuery = useQuery(
     [otherSymbols[1], currency, 1],
     () =>
       fetchConvertedCurrency({
@@ -35,17 +37,19 @@ export const useExchangeRates = (
       }),
     {
       refetchOnWindowFocus: false,
+      cacheTime: 600000,
+      staleTime: 60000,
     }
   )
 
   const rates = [
     {
-      from: otherSymbols[0],
-      result: firstData.data,
+      fromCurrency: otherSymbols[0],
+      queryData: firstQuery,
     },
     {
-      from: otherSymbols[1],
-      result: secondData.data,
+      fromCurrency: otherSymbols[1],
+      queryData: secondQuery,
     },
   ]
 

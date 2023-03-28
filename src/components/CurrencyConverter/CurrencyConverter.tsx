@@ -2,13 +2,11 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { fromMoneyState, toMoneyState } from '../../store/atoms'
 import { fromParamsSelector, toParamsSelector } from '../../store/selectors'
 import { ReactComponent as ExchangeIcon } from '../../assets/exchange.svg'
-import { CurrencyInput } from '../CurrencyInput'
+import { CurrencyInputContainer } from '../CurrencyInput/CurrencyInputContainer'
 
 import styles from './CurrencyConverter.module.scss'
 
-type CurrencyConverterProps = {}
-
-export function CurrencyConverter({}: CurrencyConverterProps) {
+export function CurrencyConverter() {
   const toMoney = useRecoilState(toMoneyState)
   const fromMoney = useRecoilState(fromMoneyState)
   const toAPIParams = useRecoilValue(toParamsSelector)
@@ -16,7 +14,7 @@ export function CurrencyConverter({}: CurrencyConverterProps) {
 
   return (
     <div className={styles.currencyConverter}>
-      <CurrencyInput
+      <CurrencyInputContainer
         title="Amount"
         moneyState={fromMoney}
         APIParams={fromAPIParams}
@@ -27,7 +25,7 @@ export function CurrencyConverter({}: CurrencyConverterProps) {
           <ExchangeIcon className={styles.exchangeIcon} />
         </button>
       </div>
-      <CurrencyInput
+      <CurrencyInputContainer
         title="Converted Amount"
         moneyState={toMoney}
         APIParams={toAPIParams}
