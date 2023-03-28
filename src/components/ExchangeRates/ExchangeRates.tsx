@@ -38,7 +38,7 @@ export const ExchangeRates = React.forwardRef<
             className={styles.changeCurrency}
             onClick={onBaseCurrencyClick}
           >
-            Основная валюта
+            Base currency
             <ExpandIcon className={styles.expand} />
             <div className={styles.chosenCurrency}>
               <img
@@ -62,7 +62,10 @@ export const ExchangeRates = React.forwardRef<
           {rates.map((item) => {
             const { queryData, fromCurrency } = item
             const isFetched =
-              queryData && !queryData.isLoading && !queryData.isError
+              queryData &&
+              !queryData.isLoading &&
+              !queryData.isFetching &&
+              !queryData.isError
 
             return (
               <div key={fromCurrency} className={styles.rate}>

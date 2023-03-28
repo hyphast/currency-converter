@@ -43,7 +43,7 @@ export const CurrencyInput = React.forwardRef<
   ) => {
     const { name, icon } = currencyItem
 
-    const { isLoading, isError, data } = queryData
+    const { isLoading, isFetching, isError, data } = queryData
 
     return (
       <div className={styles.currencyInput}>
@@ -72,7 +72,7 @@ export const CurrencyInput = React.forwardRef<
               )}
             </div>
           </div>
-          {!isLoading && !isError ? (
+          {!isLoading && !isFetching && !isError ? (
             <NumericFormat
               className={styles.input}
               value={data.result}
